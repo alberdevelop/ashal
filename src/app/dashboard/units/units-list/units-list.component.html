@@ -1,0 +1,90 @@
+<mat-toolbar style='background:#F5F5F5;margin-bottom: 10px'>
+  <span style="margin:0 auto;font-size:28px;font-weight: bold">
+    UNITS
+  </span>
+</mat-toolbar>
+
+<div id='new-unit' class="col-12">
+  <form [formGroup]="form" (ngSubmit)="submit()" autocomplete="off">
+
+    <div class="form-row">
+
+      <div class="form-group"  class="col-5">
+        <input type="text" placeholder="English Description" class="form-control" [class.is-invalid]="Arb_Des.invalid && Arb_Des.touched" formControlName="Eng_Des">
+        <small class="text-danger" [class.d-none]="Eng_Des.valid || Eng_Des.untouched">English Descrition is required</small>
+      </div>
+
+      <div class="form-group"  class="col-5">
+        <input type="text" placeholder="Arabic Description" class="form-control" [class.is-invalid]="Arb_Des.invalid && Arb_Des.touched" formControlName="Arb_Des">
+        <small class="text-danger" [class.d-none]="Arb_Des.valid || Arb_Des.untouched">Arabic Descrition is required</small>
+      </div>
+
+      <button class="btn btn-success btn-lg col-2 save" type="submit">Save</button>
+        
+    </div>
+
+  </form>
+</div>
+
+<input type="text" (keyup)="applyFilter($event.target.value)" id="search" placeholder="search">
+
+<div class="data-table">
+  
+  
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="40px" style="flex: 0 0 10%;">  <button mat-button>#</button> </mat-header-cell>
+      <mat-cell *matCellDef="let unit let i= index;" fxFlex="40px" style="flex: 0 0 10%;"> <button mat-button>{{ i+1 }}</button></mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Unit_No">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Unit No </mat-header-cell>
+      <mat-cell *matCellDef="let unit"> {{unit.Unit_No}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Eng_Des">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> English Name </mat-header-cell>
+      <mat-cell *matCellDef="let unit"> {{unit.Eng_Des}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Arb_Des">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Arabic Name </mat-header-cell>
+      <mat-cell *matCellDef="let unit"> {{unit.Arb_Des}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="controls">
+      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+      <mat-cell *matCellDef="let unit">
+        <button mat-icon-button style='margin-right:40px' (click)="onEdit(unit.Unit_No)"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button color='warn' (click)="onDelete(unit.Unit_No)"><mat-icon>delete_outline</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+          <mat-spinner></mat-spinner>
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No data.
+      </mat-footer-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.length==0)}"></mat-footer-row>
+
+  </mat-table>
+
+  <mat-paginator #paginator
+    [length]="dataSource.filteredData.length"
+    [pageIndex]="0"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+
+</div>

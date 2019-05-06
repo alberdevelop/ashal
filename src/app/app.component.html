@@ -1,0 +1,62 @@
+<!-- <div style="text-align:center">
+  <img src="assets/logo.png" alt="">
+  <h3>www.ashal-web.com</h3>
+  <p>soon</p></div> -->
+
+
+  <div class="container-fluid" style="height:100%;margin:0;padding: 0;text-align:center">
+
+    <div class="col-7" style="float:left;margin:0;background:#33365E;padding:3% 0 0 0;text-align:center;height:100%;">
+      <div>
+        <img src="assets/devices.png" style="width:70%">
+      </div>
+
+      <div id="footter-logo" class="col-7">
+        <img src="assets/logo.png" id="ashal-logo" style="width:300px">
+      </div>
+    </div>
+  
+    <div class="col-5" style="float:left;margin:0;padding:15px 0 0 0">
+
+      <div class="col-7" style="text-align:right">
+        <a href="" style="color:black;margin-right: 20px">Trial Version</a>
+        <a href="" style="color:black;">Support</a>
+      </div>
+
+      <div style="text-align: left;padding-left:30px;position: fixed;top:35%">
+        <h2 style="font-weight: bold">Sign in</h2>
+        <form [formGroup]="form" (ngSubmit)="submit()" autocomplete="off">
+          <input type="text" formControlName="userName" class="form-control" placeholder="User Name" style="width:500px;padding:30px 5px;font-size:22px;margin:20px 0">
+          <input type="text" formControlName="password" class="form-control" placeholder="Password" style="width:500px;padding:30px 5px;font-size:22px" (keydown)="submit()">
+          <button class="btn btn-lg save" routerLink="dashboard/report" [disabled]="login" style="width:500px;background:#33365E;color:white;text-align: center;margin-top:20px">Sign in</button>
+        </form>
+      </div>
+
+    </div>
+  
+  </div>
+  
+
+
+
+  <!-- <div class="container-fluid" style="height:100%;padding:3% 0 0 0; background:#33365E;text-align:center">
+
+    <div style="background:#33365E;padding:3% 0 0 0;width:60%">
+  
+      <div>
+        <img src="assets/devices.png" style="width:70%;float:left">
+      </div>
+
+      <div id="footter-logo" class="col-7">
+        <img src="assets/logo.png" id="ashal-logo" style="width:300px">
+      </div>
+
+    </div>
+
+    <div style="background:white;height:100%;width:40%">
+    asdfdsf</div>
+
+  </div> -->
+
+
+<router-outlet></router-outlet>
